@@ -89,11 +89,18 @@ body {
   flex: 1;
   padding: 20px;
   border: 1px solid red;
+  height: 500px;
 }
 
 .active {
   font-weight: bold;
   color: black !important;
   background-color: yellow;
+}
+
+.scrollable-content {
+  max-height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px; /* Add padding for scrollbar */
 }
 
