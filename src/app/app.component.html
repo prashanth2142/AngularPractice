@@ -1,1 +1,38 @@
-Test Angular APP Prashanth
+<header class="header">
+    <h1>Header</h1>
+</header>
+
+<div class="main-container">
+    <nav class="sidenav">
+        <ul>
+            <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+            <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+            <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
+            <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="body">
+        
+       
+        <div class="container">
+            <div class="column">
+                 <router-outlet></router-outlet>
+            </div>
+            <div class="column">Column 2</div>
+            <div class="column">Column 3</div>
+        </div>
+        
+    </main>
+</div>
+ 
+
+<footer class="footer">
+    <p>&copy; 2023 Your Company. All rights reserved.</p>
+</footer>
+
+
+
+<!-- <app-header></app-header> -->
+
+<!-- <app-footer></app-footer> -->
