@@ -1,5 +1,4 @@
-import { Component } from '@angular/core'; 
-import { TreeService } from './tree-service';
+import { Component } from '@angular/core';  
 
 @Component({
   selector: 'app-root',
@@ -7,8 +6,8 @@ import { TreeService } from './tree-service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Tree View'; 
+  title = 'App Home'; 
 
-  constructor(private treeService: TreeService) { 
+  constructor() { 
   }
 }

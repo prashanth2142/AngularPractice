@@ -1,0 +1,21 @@
+<div *ngIf="showContent">This content is shown if showContent is true.</div>
+
+<ul>
+    <li *ngFor="let item of items">{{ item }}</li>
+</ul>
+
+<div [ngSwitch]="condition">
+    <p *ngSwitchCase="'case1'">This is Case 1</p>
+    <p *ngSwitchCase="'case2'">This is Case 2</p>
+    <p *ngSwitchDefault>Default Case</p>
+</div>
+
+<div [ngClass]="{'highlight': isActive, 'inactive': !isActive}">Styled based on isActive value</div>
+<div [ngStyle]="{'color': textColor, 'font-size': fontSize + 'px'}">Styled with ngStyle</div>
+<input type="text" [(ngModel)]="username" />
+<form (ngSubmit)="submitForm()">
+
+    <button type="submit">Submit</button>
+</form>
+<button (click)="handleClick()">Click Me</button>
+<button [disabled]="isDisabled">Click Me</button>
