@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class BuiltinDirectivesComponent {
 items:any;
-isDisabled :boolean=false; 
+isDisabled :boolean=true; 
 username:string='Test User Name';
 fontSize:number=25;
 isActive:boolean=true;
@@ -20,7 +20,7 @@ ngOnInit(){
 }
 
 handleClick(){
-
+alert('button clicked!')
 }
 submitForm(){
 
