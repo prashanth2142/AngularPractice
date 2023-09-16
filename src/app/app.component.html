@@ -1,32 +1,5 @@
-<app-header></app-header>
-<div class="main-container">
-    <nav class="sidenav">
-        <ul>
-            <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
-            <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-            <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
-            <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
-            <li><a routerLink="/builtindirectives" routerLinkActive="active">Directives</a></li>
-        </ul>
-    </nav>
-
-    <main class="body">
-        
-       
-        <div class="container">
-            <div class="column">
-                 <router-outlet></router-outlet>
-            </div>
-            <div class="column"></div>
-            <div class="column"> 
-                <div class="scrollable-content">
-                   Regional Operations Director Apply Now Save JobSaved Job 
-                </div>
-            </div>
-        </div>
-        
-    </main>
-</div>
+<app-sidenav></app-sidenav>
+<router-outlet></router-outlet>
  
 <app-footer></app-footer>
 
