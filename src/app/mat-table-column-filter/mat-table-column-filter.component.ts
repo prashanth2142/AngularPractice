@@ -9,71 +9,58 @@ import { MatTableDataSource } from '@angular/material/table';
 export class MatTableColumnFilterComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: MatTableDataSource<PeriodicElement> | any;
-
   originalData : PeriodicElement[] = [];
-
-  inputValue: string = '';
-
-  @ViewChild('nameInput') nameInput: ElementRef | undefined;
-
-  onInputChange(event: Event) {
-    this.inputValue = (event.target as HTMLInputElement).value;
-  }
-
-  // Track the visibility state of each column's div
-  columnDivVisibility: { [key: string]: boolean } = {};
-
+  
   ngOnInit() {
     this.originalData = ELEMENT_DATA;
     this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   }
 
-  toggleDiv(column: string) {
-    // Toggle the visibility of the div for the clicked column
-    this.columnDivVisibility[column] = !this.columnDivVisibility[column];
-    this.openPopup();
-  }
-
-  applyFilter1() {
-
-
-    // Apply the filter to the specified column
-    if (this.dataSource != undefined)
-      this.dataSource.filter = this.inputValue;
-
-    this.closePopup();
-
-
-
-  }
-
   filterValue: string = '';
   selectedFilterType: string = 'contains';
+  columnName:string = 'name';
+  inputValue: string = '';
+  showPopup: boolean = false;
 
-
-  applyFilter() {
-    this.dataSource.filterPredicate = (data: PeriodicElement) => {
-      switch (this.selectedFilterType) {
-        case 'equals':
-          return data.name.toLowerCase() === this.inputValue.toLowerCase();
-        case 'notEquals':
-          return data.name.toLowerCase() !== this.inputValue.toLowerCase();
-        case 'contains':
-          return data.name.toLowerCase().includes(this.inputValue.toLowerCase());
-        case 'notContains':
-          return !data.name.toLowerCase().includes(this.inputValue.toLowerCase());
-        case 'startsWith':
-          return data.name.toLowerCase().startsWith(this.inputValue.toLowerCase());
-        case 'endsWith':
-          return data.name.toLowerCase().endsWith(this.inputValue.toLowerCase());
-        default:
-          return true; // No filtering by default
-      }
-    };
-
-    this.dataSource.filter = this.inputValue.trim().toLowerCase();
-    this.closePopup();
+  onInputChange(event: Event) {
+    this.inputValue = (event.target as HTMLInputElement).value;
   }
+
+  applyFilter(){
+
+    if(this.inputValue != ''){
+      const filteredData = this.originalData.filter((item: any) => {
+        const columnValue = item[this.columnName].toString().toLowerCase();
+        const filterValue = this.inputValue.toLowerCase();
+    
+        switch (this.selectedFilterType) {
+          case 'equals':
+            return columnValue === filterValue;
+          case 'notEquals':
+            return columnValue !== filterValue;
+          case 'contains':
+            return columnValue.includes(filterValue);
+          case 'notContains':
+            return !columnValue.includes(filterValue);
+          case 'startsWith':
+            return columnValue.startsWith(filterValue);
+          case 'endsWith':
+            return columnValue.endsWith(filterValue);
+          default:
+            return true; // No filtering by default
+        }
+      });
+    
+      this.dataSource = new MatTableDataSource(filteredData);
+
+    }
+    else{
+      this.showPopup = false;
+    }
+   
+  }
+
+   
 
   resetTable() {
     this.inputValue = '';
@@ -81,14 +68,16 @@ export class MatTableColumnFilterComponent {
     this.closePopup();
   }
 
-  showPopup: boolean = false;
-
   openPopup() {
     this.showPopup = true;
   }
 
   closePopup() {
     this.showPopup = false;
+  }
+
+  toggleDiv() {
+    this.showPopup = !this.showPopup;
   }
   
 }

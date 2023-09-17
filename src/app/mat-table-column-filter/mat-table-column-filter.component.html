@@ -1,70 +1,45 @@
-<div class="popup" [hidden]="!showPopup">
-  <div class="popup-content">
-    <span class="close" (click)="closePopup()">&times;</span>
-   
+<mat-grid-list cols="8" rowHeight="4:1" *ngIf="showPopup">
+  <mat-grid-tile>
 
-<table>
-  <thead></thead>
-  <tbody>
-    <tr>
-      <td>
+    <mat-select [(ngModel)]="columnName">
+      <mat-option value="position">position</mat-option>
+      <mat-option value="name">name</mat-option>
+      <mat-option value="weight">weight</mat-option>
+      <mat-option value="symbol">symbol</mat-option>
 
-        <mat-select [(ngModel)]="selectedFilterType">
-          <mat-option value="equals">Is Equal To</mat-option>
-          <mat-option value="notEquals">Is Not Equal To</mat-option>
-          <mat-option value="contains">Contains</mat-option>
-          <mat-option value="notContains">Does Not Contain</mat-option>
-          <mat-option value="startsWith">Starts With</mat-option>
-          <mat-option value="endsWith">Ends With</mat-option>
-        </mat-select>
-    
-       
-      </td>
-    
-    </tr>
-    <tr>
-      <td>
+    </mat-select>
 
-        <mat-form-field class="example-form-field">
-          <mat-label>Name</mat-label>
-          <input matInput type="text" [(ngModel)]="inputValue">
-          <button *ngIf="inputValue" matSuffix mat-icon-button aria-label="Clear" (input)="onInputChange($event)" (click)="inputValue=''">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
-        
+  </mat-grid-tile>
+  <mat-grid-tile>
 
-        <!-- <input [ngModel]="inputValue" (input)="onInputChange($event)" placeholder="Name Filter"> -->
-      </td>
-    </tr>
-    <tr>
-      <td>
-        
-        <button mat-raised-button color="primary" (click)="applyFilter()">Apply</button>
-        <button mat-raised-button (click)="resetTable()">Reset</button>
-        <!-- <button (click)="applyFilter()"> Apply</button>
-        <button (click)="resetTable()"> Reset</button> -->
-      </td>
-    
-    </tr>
-<tr>
-  <td>
-   
-  </td>
-</tr>
-  </tbody>
-</table>
-    
-   
-  
-  </div>
-</div>
-<ng-container *ngIf="columnDivVisibility['name']">
+    <mat-select [(ngModel)]="selectedFilterType">
+      <mat-option value="equals">Is Equal To</mat-option>
+      <mat-option value="notEquals">Is Not Equal To</mat-option>
+      <mat-option value="contains">Contains</mat-option>
+      <mat-option value="notContains">Does Not Contain</mat-option>
+      <mat-option value="startsWith">Starts With</mat-option>
+      <mat-option value="endsWith">Ends With</mat-option>
+    </mat-select>
+  </mat-grid-tile>
+  <mat-grid-tile>
 
-  
-   
+    <mat-form-field class="example-form-field">
 
-</ng-container>
+      <input matInput type="text" [(ngModel)]="inputValue">
+      <button *ngIf="inputValue" matSuffix mat-icon-button aria-label="Clear" (input)="onInputChange($event)"
+        (click)="inputValue=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+
+    <button mat-raised-button color="primary" (click)="applyFilter()">Apply</button>
+    <button mat-raised-button (click)="resetTable()">Reset</button>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
 
 <table *ngIf="dataSource" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -84,7 +59,7 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name
-      <button style="font-size: 10px;" mat-icon-button (click)="toggleDiv('name')"> <mat-icon>menu</mat-icon></button>
+      <button style="font-size: 10px;" mat-icon-button (click)="toggleDiv()"> <mat-icon>menu</mat-icon></button>
 
 
     </th>
@@ -105,8 +80,5 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
-
 
 </table>
