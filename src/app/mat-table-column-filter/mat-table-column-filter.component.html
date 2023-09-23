@@ -32,6 +32,27 @@
       </button>
     </mat-form-field>
   </mat-grid-tile>
+
+  
+
+  <mat-grid-tile>
+    <mat-select [(ngModel)]="filterCondition">
+      <mat-option value="and">AND</mat-option>
+      <mat-option value="or">OR</mat-option>
+    </mat-select>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-form-field class="example-form-field">
+      <input matInput type="text" [(ngModel)]="secondInputValue">
+      <button *ngIf="secondInputValue" matSuffix mat-icon-button aria-label="Clear" (click)="onSecondInputChange($event)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </mat-grid-tile>
+
+  
+
   <mat-grid-tile>
 
     <button mat-raised-button color="primary" (click)="applyFilter()">Apply</button>

@@ -21,43 +21,64 @@ export class MatTableColumnFilterComponent {
   columnName:string = 'name';
   inputValue: string = '';
   showPopup: boolean = false;
+  filterCondition: string = 'and';
+  secondInputValue: string = '';
 
   onInputChange(event: Event) {
     this.inputValue = (event.target as HTMLInputElement).value;
   }
 
-  applyFilter(){
+  onSecondInputChange(event: Event) {
+    this.secondInputValue = (event.target as HTMLInputElement).value;
+  }
 
-    if(this.inputValue != ''){
+  applyFilter() {
+    if (this.inputValue !== '' || this.secondInputValue !== '') {
       const filteredData = this.originalData.filter((item: any) => {
         const columnValue = item[this.columnName].toString().toLowerCase();
         const filterValue = this.inputValue.toLowerCase();
-    
-        switch (this.selectedFilterType) {
-          case 'equals':
-            return columnValue === filterValue;
-          case 'notEquals':
-            return columnValue !== filterValue;
-          case 'contains':
-            return columnValue.includes(filterValue);
-          case 'notContains':
-            return !columnValue.includes(filterValue);
-          case 'startsWith':
-            return columnValue.startsWith(filterValue);
-          case 'endsWith':
-            return columnValue.endsWith(filterValue);
-          default:
-            return true; // No filtering by default
+        const secondFilterValue = this.secondInputValue.toLowerCase();
+
+        if (this.filterCondition === 'and') {
+          return (
+            (this.applySingleFilter(columnValue, filterValue) &&
+              this.applySingleFilter(columnValue, secondFilterValue)) ||
+            (this.applySingleFilter(columnValue, filterValue) &&
+              secondFilterValue === '')
+          );
+        } else if (this.filterCondition === 'or') {
+          return (
+            this.applySingleFilter(columnValue, filterValue) ||
+            this.applySingleFilter(columnValue, secondFilterValue)
+          );
+        } else {
+          return true; // No filtering by default
         }
       });
-    
-      this.dataSource = new MatTableDataSource(filteredData);
 
+      this.dataSource = new MatTableDataSource(filteredData);
+    } else {
+      this.closePopup();
     }
-    else{
-      this.showPopup = false;
+  }
+
+  private applySingleFilter(columnValue: string, filterValue: string): boolean {
+    switch (this.selectedFilterType) {
+      case 'equals':
+        return columnValue === filterValue;
+      case 'notEquals':
+        return columnValue !== filterValue;
+      case 'contains':
+        return columnValue.includes(filterValue);
+      case 'notContains':
+        return !columnValue.includes(filterValue);
+      case 'startsWith':
+        return columnValue.startsWith(filterValue);
+      case 'endsWith':
+        return columnValue.endsWith(filterValue);
+      default:
+        return true; // No filtering by default
     }
-   
   }
 
    

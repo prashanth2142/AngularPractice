@@ -30,7 +30,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {NgIf} from '@angular/common';
-
+import { ProductComponent } from './product/product.component';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './store/counter.reducer';
+import { MyCounterComponent } from './my-counter/my-counter.component';
+ 
 
 @NgModule({
   declarations: [
@@ -43,7 +47,9 @@ import {NgIf} from '@angular/common';
     FooterComponent,
     BuiltinDirectivesComponent,
     MatTableColumnFilterComponent,
-    SidenavComponent 
+    SidenavComponent,
+    ProductComponent,
+    MyCounterComponent 
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,8 @@ import {NgIf} from '@angular/common';
     MatFormFieldModule,
     MatSelectModule,
     MatGridListModule,
-    MatInputModule, FormsModule, NgIf, MatButtonModule, MatIconModule
+    MatInputModule, FormsModule, NgIf, MatButtonModule, MatIconModule,
+    StoreModule.forRoot({ count: counterReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
