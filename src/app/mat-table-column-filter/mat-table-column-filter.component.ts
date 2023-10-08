@@ -97,7 +97,8 @@ export class MatTableColumnFilterComponent {
     const columnHeader = event.target as HTMLElement;
     if (this.activePopup) {
       this.activePopup.classList.remove('active');
-      this.showPopup = true;
+      if(this.colSelectedTemp != colSelected)
+        this.showPopup = true;
     }
     const popup = document.getElementById('popupId');
     if (popup != null && this.showPopup) {
