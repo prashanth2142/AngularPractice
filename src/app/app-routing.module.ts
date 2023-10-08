@@ -7,6 +7,7 @@ import { ContactComponent } from './contact/contact.component';
 import { BuiltinDirectivesComponent } from './builtin-directives/builtin-directives.component';
 import { MatTableColumnFilterComponent } from './mat-table-column-filter/mat-table-column-filter.component';
 import { MyCounterComponent } from './my-counter/my-counter.component';
+
  
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'builtindirectives', component: BuiltinDirectivesComponent},
   {path: 'colFilter', component: MatTableColumnFilterComponent},
+   
   {path:'storeExample', component: MyCounterComponent}
   
 ];

@@ -1,6 +1,7 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { FilterOptions, TableFilterConfig } from '../shared/TableFilterConfig';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-mat-table-column-filter',
@@ -13,6 +14,10 @@ export class MatTableColumnFilterComponent {
   originalData: PeriodicElement[] = [];
   // Define a variable to track the active popup
   activePopup: HTMLElement | null = null;
+  @Input() selectedColValue: string | undefined;
+  @ViewChild(MatMenuTrigger) menu: MatMenuTrigger | undefined;
+
+  clickedLocationObj:Event | undefined;
 
   ngOnInit() {
     this.originalData = ELEMENT_DATA;
@@ -23,8 +28,8 @@ export class MatTableColumnFilterComponent {
 
   showPopup: boolean = false;
 
-  selectedFilterType: string = 'startsWith';
-  selectedFilterType2: string = 'endsWith';
+  selectedFilterType: string = 'contains';
+  selectedFilterType2: string = 'contains';
   columnName: string = 'ClientNumber';
   inputValue: string = '';
   secondInputValue: string = '';
@@ -95,13 +100,18 @@ export class MatTableColumnFilterComponent {
     // this.sortDataAccessor();
   }
 
+  setClickedLocation(event: Event) {
+    console.log(event);
+    this.clickedLocationObj = event;
+  }
+
   toggleDiv(colSelected: string, event: Event, colDataType: string = 'text') {
-    
+    console.log(this.selectedColValue);
     this.showPopup = !this.showPopup;
     this.columnName = colSelected;
     this.columnDataType = colDataType;
     event.stopPropagation();
-    const columnHeader = event.target as HTMLElement;
+    const columnHeader = this.clickedLocationObj?.target as HTMLElement;
     if (this.activePopup) {
       this.activePopup.classList.remove('active');
       if(this.colSelectedTemp != colSelected)
@@ -124,6 +134,13 @@ export class MatTableColumnFilterComponent {
       this.activePopup = popup;
       this.colSelectedTemp = colSelected;
     }
+
+    
+
+    //console.log(`Clicked: ${value}`);
+    if(this.menu)
+    // Close the menu
+      this.menu.closeMenu();
   }
 
   onColumnNameChange(event: any) {
@@ -147,6 +164,14 @@ export class MatTableColumnFilterComponent {
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
     //this.sortDataAccessor();
+  }
+
+  handleItemClick(value: string) {
+    // Do something with the item value, e.g., emit an event or update a property
+    console.log(`Clicked: ${value}`);
+    if(this.menu)
+    // Close the menu
+      this.menu.closeMenu();
   }
 
 }
