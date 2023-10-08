@@ -53,23 +53,28 @@ export class MatTableColumnFilterComponent {
   }
 
   applyFilter() {
-    const filterOptions: FilterOptions = {
-      columnDataType: this.columnDataType,
-      originalData: this.originalData,
-      columnName: this.columnName,
-      dtFilter1: this.dtFilter1,
-      dtFilter2: this.dtFilter2,
-      filterCondition: this.filterCondition,
-      inputValue: this.inputValue,
-      secondInputValue: this.secondInputValue,
-      selectedFilterType: this.selectedFilterType,
-      selectedFilterType2: this.selectedFilterType2,
-      selectedDateFilterType: this.selectedDateFilterType,
-      selectedDateFilterType2: this.selectedDateFilterType2,
-      selectedRBValue: this.selectedRBValue,
-    };
-    const filteredData = TableFilterConfig.getFilteredData(filterOptions);
-    this.updateMatTable(filteredData);
+    if(this.inputValue != '' || this.secondInputValue != ''){
+      const filterOptions: FilterOptions = {
+        columnDataType: this.columnDataType,
+        originalData: this.originalData,
+        columnName: this.columnName,
+        dtFilter1: this.dtFilter1,
+        dtFilter2: this.dtFilter2,
+        filterCondition: this.filterCondition,
+        inputValue: this.inputValue,
+        secondInputValue: this.secondInputValue,
+        selectedFilterType: this.selectedFilterType,
+        selectedFilterType2: this.selectedFilterType2,
+        selectedDateFilterType: this.selectedDateFilterType,
+        selectedDateFilterType2: this.selectedDateFilterType2,
+        selectedRBValue: this.selectedRBValue,
+      };
+      const filteredData = TableFilterConfig.getFilteredData(filterOptions);
+      this.updateMatTable(filteredData);
+    }
+    
+    if(this.activePopup)
+      this.activePopup.classList.remove('active');
 
   }
 
@@ -82,7 +87,9 @@ export class MatTableColumnFilterComponent {
     this.dtFilter2 = null;
     this.dataSource = new MatTableDataSource<any>();
     this.dataSource.data = [...this.originalData];
-    this.showPopup = false;
+    this.showPopup = true;
+    if(this.activePopup)
+      this.activePopup.classList.remove('active');
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
     // this.sortDataAccessor();
