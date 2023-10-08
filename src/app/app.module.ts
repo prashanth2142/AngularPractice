@@ -34,7 +34,8 @@ import { ProductComponent } from './product/product.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './store/counter.reducer';
 import { MyCounterComponent } from './my-counter/my-counter.component';
- 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -70,10 +71,13 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
     MatFormFieldModule,
     MatSelectModule,
     MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule, 
     MatInputModule, FormsModule, NgIf, MatButtonModule, MatIconModule,
     StoreModule.forRoot({ count: counterReducer })
   ],
-  providers: [],
+  providers: [  MatDatepickerModule,
+    MatNativeDateModule  ],
   bootstrap: [AppComponent]
 })
 

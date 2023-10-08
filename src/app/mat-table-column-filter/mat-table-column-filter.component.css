@@ -1,42 +1,31 @@
-/* Style to hide the popup using the 'hidden' class */
-.popup.hidden {
-    display: none;
-  }
-  
-  /* Styles for the overlay */
-  .popup {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 25%;
-    height: 25%;
-    background-color: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    margin-left: 25%;
-  }
-  
-  /* Styles for the popup content */
-  .popup-content {
-    background-color: #fff;
-    padding: 10%;
-    border-radius: 0px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    position: relative;
-  }
-  
-  /* Style for the close button (an "x" icon) */
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .close:hover {
-    color: red;
-  }
-  
+ /* Hide the popup by default */
+.popup {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  max-width: 250px; /* Set the maximum width */
+}
+
+/* Show the popup when it's active */
+.popup.active {
+  display: block;
+}
+
+
+/* Reduce the size of Angular Material input fields */
+.mat-form-field {
+  font-size: 14px; /* Adjust the font size as needed */
+  padding: 4px 8px; /* Adjust padding as needed */
+  margin: 4px 0; /* Adjust margins as needed */
+  width: auto; /* Set width to auto or a specific value */
+}
+
+/* Reduce the size of Angular Material input elements */
+.mat-input-element {
+  font-size: 14px; /* Adjust the font size as needed */
+  padding: 4px 8px; /* Adjust padding as needed */
+}

@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { FilterOptions, TableFilterConfig } from '../shared/TableFilterConfig';
 
 @Component({
   selector: 'app-mat-table-column-filter',
@@ -9,20 +10,39 @@ import { MatTableDataSource } from '@angular/material/table';
 export class MatTableColumnFilterComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: MatTableDataSource<PeriodicElement> | any;
-  originalData : PeriodicElement[] = [];
-  
+  originalData: PeriodicElement[] = [];
+  // Define a variable to track the active popup
+  activePopup: HTMLElement | null = null;
+
   ngOnInit() {
     this.originalData = ELEMENT_DATA;
     this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    this.filterOptions1 = TableFilterConfig.filterOptions1;
+    this.filterOptions2 = TableFilterConfig.filterOptions2;
   }
 
-  filterValue: string = '';
-  selectedFilterType: string = 'contains';
-  columnName:string = 'name';
-  inputValue: string = '';
   showPopup: boolean = false;
-  filterCondition: string = 'and';
+
+  selectedFilterType: string = 'startsWith';
+  selectedFilterType2: string = 'endsWith';
+  columnName: string = 'ClientNumber';
+  inputValue: string = '';
   secondInputValue: string = '';
+  filterCondition: string = 'and';
+  filterCondition2: string = 'and';
+
+  columnDataType: string = 'text';
+  selectedRBValue: string = 'true';
+  selectedDateFilterType: string = 'equals';
+  selectedDateFilterType2: string = 'equals';
+  dtFilter1: Date | null = null;
+  dtFilter2: Date | null = null;
+  filterOptions1: any;
+  filterOptions2: any;
+  dateFilterOptions1: any;
+  dateFilterOptions2: any;
+
+  colSelectedTemp:string='';
 
   onInputChange(event: Event) {
     this.inputValue = (event.target as HTMLInputElement).value;
@@ -33,74 +53,94 @@ export class MatTableColumnFilterComponent {
   }
 
   applyFilter() {
-    if (this.inputValue !== '' || this.secondInputValue !== '') {
-      const filteredData = this.originalData.filter((item: any) => {
-        const columnValue = item[this.columnName].toString().toLowerCase();
-        const filterValue = this.inputValue.toLowerCase();
-        const secondFilterValue = this.secondInputValue.toLowerCase();
+    const filterOptions: FilterOptions = {
+      columnDataType: this.columnDataType,
+      originalData: this.originalData,
+      columnName: this.columnName,
+      dtFilter1: this.dtFilter1,
+      dtFilter2: this.dtFilter2,
+      filterCondition: this.filterCondition,
+      inputValue: this.inputValue,
+      secondInputValue: this.secondInputValue,
+      selectedFilterType: this.selectedFilterType,
+      selectedFilterType2: this.selectedFilterType2,
+      selectedDateFilterType: this.selectedDateFilterType,
+      selectedDateFilterType2: this.selectedDateFilterType2,
+      selectedRBValue: this.selectedRBValue,
+    };
+    const filteredData = TableFilterConfig.getFilteredData(filterOptions);
+    this.updateMatTable(filteredData);
 
-        if (this.filterCondition === 'and') {
-          return (
-            (this.applySingleFilter(columnValue, filterValue) &&
-              this.applySingleFilter(columnValue, secondFilterValue)) ||
-            (this.applySingleFilter(columnValue, filterValue) &&
-              secondFilterValue === '')
-          );
-        } else if (this.filterCondition === 'or') {
-          return (
-            this.applySingleFilter(columnValue, filterValue) ||
-            this.applySingleFilter(columnValue, secondFilterValue)
-          );
-        } else {
-          return true; // No filtering by default
-        }
-      });
-
-      this.dataSource = new MatTableDataSource(filteredData);
-    } else {
-      this.closePopup();
-    }
   }
 
-  private applySingleFilter(columnValue: string, filterValue: string): boolean {
-    switch (this.selectedFilterType) {
-      case 'equals':
-        return columnValue === filterValue;
-      case 'notEquals':
-        return columnValue !== filterValue;
-      case 'contains':
-        return columnValue.includes(filterValue);
-      case 'notContains':
-        return !columnValue.includes(filterValue);
-      case 'startsWith':
-        return columnValue.startsWith(filterValue);
-      case 'endsWith':
-        return columnValue.endsWith(filterValue);
-      default:
-        return true; // No filtering by default
-    }
-  }
 
-   
 
   resetTable() {
     this.inputValue = '';
-    this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    this.closePopup();
-  }
-
-  openPopup() {
-    this.showPopup = true;
-  }
-
-  closePopup() {
+    this.secondInputValue = '';
+    this.dtFilter1 = null;
+    this.dtFilter2 = null;
+    this.dataSource = new MatTableDataSource<any>();
+    this.dataSource.data = [...this.originalData];
     this.showPopup = false;
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    // this.sortDataAccessor();
   }
 
-  toggleDiv() {
+  toggleDiv(colSelected: string, event: Event, colDataType: string = 'text') {
+    
     this.showPopup = !this.showPopup;
+    this.columnName = colSelected;
+    this.columnDataType = colDataType;
+    event.stopPropagation();
+    const columnHeader = event.target as HTMLElement;
+    if (this.activePopup) {
+      this.activePopup.classList.remove('active');
+      this.showPopup = true;
+    }
+    const popup = document.getElementById('popupId');
+    if (popup != null && this.showPopup) {
+      const rect = columnHeader.getBoundingClientRect();
+      const table = columnHeader.closest('table');
+      if (table) {
+        const tableRect = table.getBoundingClientRect();
+        const left = rect.left - tableRect.left;
+        const top = rect.bottom - tableRect.top;
+        popup.style.left = `${left}px`;
+        popup.style.top = `${top}px`;
+        popup.classList.add('active');
+        this.activePopup = popup;
+      }
+      popup.classList.add('active');
+      this.activePopup = popup;
+      this.colSelectedTemp = colSelected;
+    }
   }
-  
+
+  onColumnNameChange(event: any) {
+    const newValue = event.value;
+    if (newValue == 'IsActive' || newValue == 'IsHeld') {
+      this.columnDataType = 'boolean';
+    }
+    else if (newValue == 'HeldUntilDate') {
+      this.columnDataType = 'date';
+    }
+    else {
+      this.columnDataType = 'text';
+    }
+  }
+
+
+
+  updateMatTable(filteredData: any) {
+    this.dataSource = new MatTableDataSource<any>();
+    this.dataSource.data = [...filteredData];
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+    //this.sortDataAccessor();
+  }
+
 }
 
 
