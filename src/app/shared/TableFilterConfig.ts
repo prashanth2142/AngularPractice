@@ -89,6 +89,25 @@ export class TableFilterConfig{
         }
     }
 
+    public static applyNumericFilter1(columnValue: number, filterValue: number, selectedFilterType: string = ''): boolean {
+        switch (selectedFilterType) {
+          case 'equals':
+            return columnValue === filterValue;
+          case 'notEquals':
+            return columnValue === filterValue;
+          case 'greaterOrEqual':
+            return columnValue >= filterValue;
+          case 'greater':
+            return columnValue > filterValue;
+          case 'lessOrEqual':
+            return columnValue <= filterValue;
+          case 'less':
+            return columnValue < filterValue;
+          default:
+            return true;
+        }
+      }
+
     public static  filterOptions1 = [
         { value: 'equals', label: 'Is Equal To' },
         { value: 'notEquals', label: 'Is Not Equal To' },
@@ -144,7 +163,7 @@ export class TableFilterConfig{
                 let columnValue = '';
                 if(item[options.columnName] != null){
                     columnValue = item[options.columnName].toString();
-                    const condition1 = TableFilterConfig.applyDateFilter1(columnValue, itemDateObj1, options.selectedDateFilterType);
+                    const condition1 = TableFilterConfig.applyDateFilter1(columnValue, itemDateObj1, options.selectedDateFilterType1);
 
                     const condition2 = TableFilterConfig.applyDateFilter2(columnValue, itemDateObj2, options.selectedDateFilterType2);
 
@@ -165,6 +184,25 @@ export class TableFilterConfig{
             });
 
         }
+        else if(options.columnDataType == 'number'){
+            filteredData = options.originalData.filter((item: any) => {
+              let columnValue = 0;
+              columnValue = Number(item[options.columnName]);
+      
+              const filterValue = options.numVal1 != undefined ? options.numVal1 : 0;
+              const secondFilterValue =  options.numVal2 != undefined ? options.numVal2 : 0;
+              const condition1 = TableFilterConfig.applyNumericFilter1(columnValue, filterValue, options.selectedNumericFilterType1);
+              const condition2 = TableFilterConfig.applyNumericFilter1(columnValue, secondFilterValue, options.selectedNumericFilterType2);
+      
+              if (options.filterCondition === 'and') {
+                return condition1 && condition2;
+              } else if (options.filterCondition === 'or') {
+                return condition1 || condition2;
+              } else {
+                return false;
+              }
+            });
+          }
         else{
             if (options.inputValue !== '') {
                 filteredData = options.originalData.filter((item: any) => {
@@ -183,7 +221,7 @@ export class TableFilterConfig{
 
                     const filterValue = options.inputValue.toLowerCase();
                     const secondFilterValue = options.secondInputValue != undefined ? options.secondInputValue.toLowerCase() : '';
-                    const condition1 = TableFilterConfig.applyTextFilter1(columnValue, filterValue, options.selectedFilterType);
+                    const condition1 = TableFilterConfig.applyTextFilter1(columnValue, filterValue, options.selectedFilterType1);
                     const condition2 = TableFilterConfig.applyTextFilter2(columnValue, secondFilterValue, options.selectedFilterType2);
 
                     if (options.filterCondition === 'and') {
@@ -218,15 +256,20 @@ export class TableFilterConfig{
 export interface FilterOptions {
   columnDataType: string;
   originalData: any;
+  filteredData:any;
   columnName: any;
   dtFilter1: Date | null;
   dtFilter2: Date | null;
   filterCondition: string;
   inputValue: string;
   secondInputValue: string;
-  selectedFilterType: string;
+  selectedFilterType1: string;
   selectedFilterType2: string;
-  selectedDateFilterType: string;
+  selectedDateFilterType1: string;
   selectedDateFilterType2: string;
   selectedRBValue: string;
+  selectedNumericFilterType1:string;
+  selectedNumericFilterType2:string;
+  numVal1?:number;
+  numVal2?:number;
 }

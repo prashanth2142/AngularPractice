@@ -18,7 +18,7 @@
 
 /* Reduce the size of Angular Material input fields */
 .mat-form-field {
-  font-size: 14px; /* Adjust the font size as needed */
+  font-size: 10px; /* Adjust the font size as needed */
   padding: 4px 8px; /* Adjust padding as needed */
   margin: 4px 0; /* Adjust margins as needed */
   width: auto; /* Set width to auto or a specific value */
@@ -26,6 +26,6 @@
 
 /* Reduce the size of Angular Material input elements */
 .mat-input-element {
-  font-size: 14px; /* Adjust the font size as needed */
+  font-size: 10px; /* Adjust the font size as needed */
   padding: 4px 8px; /* Adjust padding as needed */
 }

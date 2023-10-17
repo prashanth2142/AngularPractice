@@ -3,7 +3,7 @@ import { NgModule, Component } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component'; 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
@@ -36,7 +36,7 @@ import { counterReducer } from './store/counter.reducer';
 import { MyCounterComponent } from './my-counter/my-counter.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
@@ -75,6 +76,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule, 
     MatInputModule, FormsModule, NgIf, MatButtonModule, MatIconModule,
+    MatCheckboxModule,
     StoreModule.forRoot({ count: counterReducer })
   ],
   providers: [  MatDatepickerModule,

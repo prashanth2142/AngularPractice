@@ -1,136 +1,132 @@
-<div id="popupId"   [hidden]="!showPopup"   class="popup" style="margin-top: 10px;">
-  <!-- <mat-form-field>
-    <mat-label>Select Column</mat-label>
-    <mat-select [(ngModel)]="columnName" (selectionChange)="onColumnNameChange($event)">
-      <mat-option value="name">Name</mat-option>
-      <mat-option value="position">Position</mat-option>
-      <mat-option value="weight">Weight</mat-option>
-      <mat-option value="symbol">Symbol</mat-option>
-      
-    </mat-select>
-
-  </mat-form-field>
-  &nbsp;&nbsp;&nbsp; -->
-  <mat-form-field *ngIf="columnDataType == 'text'">
-    <mat-label>Select Filter Type</mat-label>
-    <mat-select [(ngModel)]="selectedFilterType">
-      <mat-option *ngFor="let option of filterOptions1" [value]="option.value">{{ option.label }}</mat-option>
-    </mat-select>
 
 
-
-
-  </mat-form-field>
-  &nbsp;&nbsp;&nbsp;
-  <mat-form-field *ngIf="columnDataType == 'date'">
-    <mat-label>Select Filter Type</mat-label>
-    <mat-select [(ngModel)]="selectedDateFilterType">
-      <mat-option *ngFor="let option of dateFilterOptions1" [value]="option.value">{{ option.label }}</mat-option>
-    </mat-select>
-
-
-
-  </mat-form-field>
-  &nbsp;&nbsp;&nbsp;
-  <mat-form-field *ngIf="columnDataType == 'date'">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="dtFilter1">
-
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-
-
- 
-    <mat-form-field *ngIf="columnDataType == 'text'">
-      <mat-label>Enter some input</mat-label>
-      <input matInput type="text" [(ngModel)]="inputValue">
-      <button *ngIf="inputValue" matSuffix mat-icon-button aria-label="Clear" (input)="onInputChange($event)"
-      (click)="inputValue=''">
-      <mat-icon>close</mat-icon>
-    </button>
-    </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
-    <mat-form-field *ngIf="columnDataType == 'text' || columnDataType == 'date'">
-      <mat-label>Select Condition Type</mat-label>
-      <mat-select [(ngModel)]="filterCondition">
-        <mat-option value="and">AND</mat-option>
-        <mat-option value="or">OR</mat-option>
-      </mat-select>
-
-    </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
-    <mat-form-field *ngIf="columnDataType == 'text'">
-      <mat-label>Select Filter Type</mat-label>
-      <mat-select [(ngModel)]="selectedFilterType2">
-        <mat-option *ngFor="let option of filterOptions2" [value]="option.value">{{ option.label }}</mat-option>
-      </mat-select>
-
-    </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
-    <mat-form-field *ngIf="columnDataType == 'text'">
-      <mat-label>Enter some input</mat-label>
-      <input matInput type="text" [(ngModel)]="secondInputValue">
-      <button *ngIf="secondInputValue" matSuffix mat-icon-button aria-label="Clear" (input)="onInputChange($event)"
-      (click)="secondInputValue=''">
-      <mat-icon>close</mat-icon>
-    </button>
-    </mat-form-field>
-
-    &nbsp;&nbsp;&nbsp;
-    <mat-form-field *ngIf="columnDataType == 'date'">
-      <mat-label>Select Filter Type</mat-label>
-      <mat-select [(ngModel)]="selectedDateFilterType2">
-        <mat-option *ngFor="let option of dateFilterOptions2" [value]="option.value">{{ option.label }}</mat-option>
-      </mat-select>
-
-
-
-
-    </mat-form-field>
-    &nbsp;&nbsp;&nbsp;
-    <mat-form-field *ngIf="columnDataType == 'date'">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker2" [(ngModel)]="dtFilter2">
-
-      <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
-
-
-     <!-- <div style="margin-left: -100px;" *ngIf="columnDataType == 'boolean'">
-
-      <div class="radio__wrapper">
-        <input type="radio" id="rbTrue" style="padding:1.25em !important"   [(ngModel)]="selectedRBValue" name="rbBoolType"
-        class="radio__input" value="true" />
-        &nbsp;<label for="blkReturnId" class="radio__lbl">true</label>
-    </div>
-    <div class="radio__wrapper">
-        <input type="radio" id="rbFalse" style="padding:1.25em !important"  [(ngModel)]="selectedRBValue" name="rbBoolType"
-        class="radio__input" value="false" />
-        &nbsp;<label for="" class="radio__lbl">false</label>
-    </div>
-     </div> -->
-     <button mat-raised-button class="btn" (click)="applyFilter()" >Filter</button> &nbsp;&nbsp;&nbsp;
-     <button mat-raised-button class="btn" (click)="resetTable()" >Clear</button>
-
-</div>
  
 
 <div >
   <table *ngIf="dataSource" mat-table [dataSource]="dataSource" >
     
+    <mat-menu #colMenu="matMenu"   >
+      <ng-template matMenuContent>
+        
+ 
+
+          <mat-checkbox [(ngModel)]="positionCol"    
+           (change)="onCheckboxChange('position', $event)">position</mat-checkbox>
+        
+          <mat-checkbox [(ngModel)]="nameCol"   (change)="onCheckboxChange('name',$event)">name</mat-checkbox>
+        
+          <mat-checkbox [(ngModel)]="weightCol" (change)="onCheckboxChange('weight',$event)">weight</mat-checkbox>
+   
+          <mat-checkbox [(ngModel)]="symbolCol" (change)="onCheckboxChange('symbol', $event)">symbol</mat-checkbox>
+      
+      </ng-template>
+    </mat-menu>
+    
+
 
     <mat-menu #menu="matMenu">
       <ng-template matMenuContent let-selectedColValue="selectedColValue">
        
-        <!-- <button mat-menu-item>Columns</button> -->
-        <button mat-menu-item (click)="toggleDiv(selectedColValue, $event)">
+        <button mat-menu-item   [matMenuTriggerFor]="colMenu" [matMenuTriggerData]="{ selectedColValue: selectedColValue }" >
+          <mat-icon>filter_list</mat-icon>
+          Columns</button>
+        <button mat-menu-item  [matMenuTriggerFor]="vertebrates"  [matMenuTriggerData]="{ selectedColValue: selectedColValue }">
           <mat-icon>filter_list</mat-icon>
           Filter</button>
-        <!-- <button mat-menu-item>  <b>{{selectedColValue}}</b></button> -->
+        
       </ng-template>
+    </mat-menu>
+
+    <mat-menu #vertebrates="matMenu" >
+     <ng-template matMenuContent>
+      
+      <mat-form-field *ngIf="columnDataType == 'text'">
+        <mat-label>Select Filter Type</mat-label>
+        <mat-select  (click)="$event.stopPropagation();" [(ngModel)]="selectedFilterType1">
+          <mat-option *ngFor="let option of filterOptions1" [value]="option.value">{{ option.label }}</mat-option>
+        </mat-select>
+    
+    
+    
+    
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;
+      <mat-form-field *ngIf="columnDataType == 'date'">
+        <mat-label>Select Filter Type</mat-label>
+        <mat-select (click)="$event.stopPropagation();" [(ngModel)]="selectedDateFilterType1">
+          <mat-option *ngFor="let option of dateFilterOptions1" [value]="option.value">{{ option.label }}</mat-option>
+        </mat-select>
+    
+    
+    
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;
+      <mat-form-field *ngIf="columnDataType == 'date'">
+        <mat-label>Choose a date</mat-label>
+        <input (click)="$event.stopPropagation();" matInput [matDatepicker]="picker" [(ngModel)]="dtFilter1">
+    
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    
+    
+    
+     
+        <mat-form-field *ngIf="columnDataType == 'text'" (click)="$event.stopPropagation();">
+          <mat-label>Enter some input</mat-label>
+          <input matInput type="text" [(ngModel)]="inputValue">
+           
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field (click)="$event.stopPropagation();" *ngIf="columnDataType == 'text' || columnDataType == 'date'">
+          <mat-label>Select Condition Type</mat-label>
+          <mat-select [(ngModel)]="filterCondition">
+            <mat-option value="and">AND</mat-option>
+            <mat-option value="or">OR</mat-option>
+          </mat-select>
+    
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field (click)="$event.stopPropagation();" *ngIf="columnDataType == 'text'">
+          <mat-label>Select Filter Type</mat-label>
+          <mat-select [(ngModel)]="selectedFilterType2">
+            <mat-option *ngFor="let option of filterOptions2" [value]="option.value">{{ option.label }}</mat-option>
+          </mat-select>
+    
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field (click)="$event.stopPropagation();" *ngIf="columnDataType == 'text'">
+          <mat-label>Enter some input</mat-label>
+          <input matInput type="text" [(ngModel)]="secondInputValue">
+          
+        </mat-form-field>
+    
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field (click)="$event.stopPropagation();" *ngIf="columnDataType == 'date'">
+          <mat-label>Select Filter Type</mat-label>
+          <mat-select [(ngModel)]="selectedDateFilterType2">
+            <mat-option *ngFor="let option of dateFilterOptions2" [value]="option.value">{{ option.label }}</mat-option>
+          </mat-select>
+    
+    
+    
+    
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field *ngIf="columnDataType == 'date'">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker2" [(ngModel)]="dtFilter2">
+    
+          <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    
+    
+          
+         <button mat-raised-button class="btn" (click)="applyFilter()" >Filter</button> &nbsp;&nbsp;&nbsp;
+         <button mat-raised-button class="btn" (click)="clearFilter()" >Clear</button>
+       
+     </ng-template>
     </mat-menu>
  
     <!-- Position Column -->
@@ -138,7 +134,7 @@
       <th mat-header-cell *matHeaderCellDef> No.
         <button style="font-size: 10px;" 
         mat-icon-button
-        (click)="setClickedLocation($event)"
+        (click)="setColumnDataType('position', $event)"
          [matMenuTriggerFor]="menu"
          [matMenuTriggerData]="{ selectedColValue: 'position' }"
          >
@@ -153,7 +149,7 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name
         <button style="font-size: 10px;" mat-icon-button
-        (click)="setClickedLocation($event)" 
+        (click)="setColumnDataType('name', $event)" 
         [matMenuTriggerFor]="menu"
         [matMenuTriggerData]="{ selectedColValue: 'name'}"
         > 
@@ -171,7 +167,7 @@
         
         Weight 
         <button style="font-size: 10px;" mat-icon-button
-        (click)="setClickedLocation($event)"
+        (click)="setColumnDataType('weight', $event)"
          [matMenuTriggerFor]="menu"
          [matMenuTriggerData]="{ selectedColValue: 'weight' }"
         > <mat-icon>menu</mat-icon></button>
@@ -185,7 +181,7 @@
       <th mat-header-cell *matHeaderCellDef> Symbol 
 
         <button style="font-size: 10px;" mat-icon-button 
-        (click)="setClickedLocation($event)"
+        (click)="setColumnDataType('symbol',$event)"
         [matMenuTriggerFor]="menu"
         [matMenuTriggerData]="{ selectedColValue: 'symbol' }"
         > <mat-icon>menu</mat-icon></button>
