@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';  
 
+  //external js function declaration
+  declare function getToday(): any;
+  declare function greetings(name: any): any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,4 +13,15 @@ export class AppComponent {
 
   constructor() { 
   }
+
+ngOnInit(): void {
+    // // call the externaljs functions
+    // getToday(); // without param
+    // greetings('Prashanth'); // with param
+
+    // import('src/assets/custom').then(customFile=>{
+    //   customFile.getToday();
+    // });
+
+}
 }

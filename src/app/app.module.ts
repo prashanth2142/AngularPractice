@@ -37,6 +37,8 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { RxJsOperatorsComponent } from './rx-js-operators/rx-js-operators.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTableColumnFilterComponent,
     SidenavComponent,
     ProductComponent,
-    MyCounterComponent 
+    MyCounterComponent,
+    RxJsOperatorsComponent 
   ],
   imports: [
     BrowserModule,
