@@ -8,6 +8,7 @@ import { BuiltinDirectivesComponent } from './builtin-directives/builtin-directi
 import { MatTableColumnFilterComponent } from './mat-table-column-filter/mat-table-column-filter.component';
 import { MyCounterComponent } from './my-counter/my-counter.component';
 import { RxJsOperatorsComponent } from './rx-js-operators/rx-js-operators.component';
+import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-encapsulation/shadow-dom-encapsulation.component';
 
  
 
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'colFilter', component: MatTableColumnFilterComponent},
    
   {path:'storeExample', component: MyCounterComponent},
-  {path: 'rxjs', component: RxJsOperatorsComponent}
+  {path: 'rxjs', component: RxJsOperatorsComponent},
+  {path: 'encaps', component: ShadowDomEncapsulationComponent}
   
 ];
 

@@ -38,6 +38,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RxJsOperatorsComponent } from './rx-js-operators/rx-js-operators.component';
+import { NoEncapsulationComponent } from './Encapsulation/no-encapsulation/no-encapsulation.component';
+import { EmulatedEncapsulationComponent } from './Encapsulation/emulated-encapsulation/emulated-encapsulation.component';
+import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-encapsulation/shadow-dom-encapsulation.component';
 
 
 @NgModule({
@@ -54,7 +57,7 @@ import { RxJsOperatorsComponent } from './rx-js-operators/rx-js-operators.compon
     SidenavComponent,
     ProductComponent,
     MyCounterComponent,
-    RxJsOperatorsComponent 
+    RxJsOperatorsComponent
   ],
   imports: [
     BrowserModule,

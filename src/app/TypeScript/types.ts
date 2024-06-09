@@ -5,7 +5,7 @@ class TypesExample {
     undefVar: undefined; // Undefined
     nullVar: null = null; // Null
     sym: symbol = Symbol("unique"); // Symbol
-    bigInt: bigint = 1234567890123456789012345678901234567890n; // BigInt
+    //bigInt: bigint = 1234567890123456789012345678901234567890n; // BigInt
 
     person: { name: string; age: number } = {
         name: "John",
