@@ -1,121 +1,29 @@
-/* 
-body, h1, h2, h3, p, ul, li {
+/* Ensure the entire page takes full height */
+html, body {
+  height: 100vh !important; /* Force full viewport height */
   margin: 0;
   padding: 0;
+  overflow: hidden; /* Prevents unwanted scrollbars */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
- 
+/* Ensure Angular Material does not restrict height */
+mat-sidenav-container {
+  height: 100vh !important; /* Prevents extra spacing issues */
+  overflow: hidden;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh !important;
+  overflow: hidden;
+}
+
+/* Reset Angular Material body styles */
 body {
-  font-family: Arial, sans-serif;
-}
-
-
-.header {
-  background-color: yellow;
-  color: black;
-  padding: 20px;
-  text-align: left;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.header h1 {
-  margin: 0;
-  font-size: 20px;
-}
-.header p {
-  margin: 10px 0 0;
-  font-size: 18px;
-}
- 
-.content {
-  height: 1500px;
-  background-color: #f5f5f5;
-  padding: 20px;
-}
-
- 
-.sidenav {
-  background-color: green;
-  color: #fff;
-  width: 10%;
-  padding: 20px;
-}
-
-.sidenav ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidenav li {
-  margin-bottom: 10px;
-}
-
-.sidenav a {
-  text-decoration: none;
-  color: #fff;
-}
-
- 
-.body {
-  padding: 20px;
-}
-
- 
-.footer {
-  background-color: green;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
-}
-
-
- 
-.main-container {
   display: flex;
-  height: 590px;
+  flex-direction: column;
 }
-
- 
-.body {
-  flex: 1;
-  padding: 20px;
-}
-
- 
-@media (max-width: 768px) {
-  .main-container {
-      flex-direction: column;
-  }
-
-   
-}
-
- 
-
-.container {
-  display: flex;
-}
-
-.column {
-  flex: 1;
-  padding: 20px;
-  border: 1px solid red;
-  height: 500px;
-}
-
-.active {
-  font-weight: bold;
-  color: black !important;
-  background-color: yellow;
-}
-
-.scrollable-content {
-  max-height: 100%;
-  overflow-y: auto; 
-  padding-right: 10px; 
-}
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */

@@ -19,11 +19,10 @@ from([0,1,2,3,4])
   complete: () => console.log(`${operator.name} completed`)
 });
 
-// example(mergeMap)();
-// //example(flatMap);
-// //example(concatMap)();    
-// example(switchMap)();
-// example(exhaustMap)();
+example(mergeMap)();
+example(concatMap)();    
+ example(switchMap)();
+example(exhaustMap)();
 
   }
 

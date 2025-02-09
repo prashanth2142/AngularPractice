@@ -1,4 +1,42 @@
-<app-sidenav></app-sidenav>
-<router-outlet></router-outlet>
+<!-- <app-sidenav>
+    <router-outlet></router-outlet>
+</app-sidenav>
+<app-footer></app-footer> -->
 
-<app-footer></app-footer>
+<mat-sidenav-container class="container">
+    <!-- Side Navigation -->
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+        <!-- <mat-toolbar>#</mat-toolbar> -->
+        <!-- <mat-divider></mat-divider> -->
+        <mat-nav-list>
+            <a mat-list-item routerLink="/home" >🏠 Home</a>
+        <a mat-list-item routerLink="/about" >About</a>
+        <a mat-list-item routerLink="/colFilter" >Mat Table</a>
+        <a mat-list-item routerLink="/builtindirectives">Directives</a>
+        <a mat-list-item routerLink="/storeExample">NGRX Store</a>
+        <a mat-list-item routerLink="/rxjs" >RxJs Operators</a>
+        <a mat-list-item routerLink="/encaps">Encapsulation</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Main Content -->
+    <mat-sidenav-content>
+        <!-- Header -->
+        <mat-toolbar color="primary">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Angular Test App</span>
+        </mat-toolbar>
+
+        <!-- Body -->
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 My App. All rights reserved.</p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

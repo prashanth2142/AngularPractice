@@ -15,6 +15,7 @@ import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-enca
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'services', component: ServicesComponent},
   {path: 'contact', component: ContactComponent},

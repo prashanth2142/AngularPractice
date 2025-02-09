@@ -1,0 +1,55 @@
+/* Ensure full height but no horizontal scroll */
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents unwanted horizontal scrollbar */
+    overflow-y: hidden; /* Prevents vertical scrollbar on load */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Main container */
+  .container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  /* Prevent horizontal scrollbar in sidenav container */
+  mat-sidenav-container {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Allow vertical scrolling inside content only when needed */
+  mat-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto; /* Allows vertical scroll only when necessary */
+    overflow-x: hidden; /* Prevents horizontal scrollbar */
+  }
+  
+  /* Content area */
+  .content {
+    flex: 1; /* Takes available space */
+    padding: 20px;
+    overflow-y: auto; /* Enables scrolling if content overflows */
+    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+    min-height: 0;
+  }
+  
+  /* Footer should never cause horizontal scroll */
+  .footer {
+    text-align: center;
+    padding: 10px;
+    background: #f1f1f1;
+    width: 100vw; /* Ensures footer spans full width */
+    flex-shrink: 0;
+    overflow-x: hidden; /* Prevents horizontal scroll */
+    white-space: nowrap; /* Ensures text doesn’t wrap and cause overflow */
+  }
+  
