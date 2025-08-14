@@ -9,6 +9,8 @@ import { MatTableColumnFilterComponent } from './mat-table-column-filter/mat-tab
 import { MyCounterComponent } from './my-counter/my-counter.component';
 import { RxJsOperatorsComponent } from './rx-js-operators/rx-js-operators.component';
 import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-encapsulation/shadow-dom-encapsulation.component';
+import { ReactiveFormExampleComponent } from './Forms/reactive-form-example/reactive-form-example.component';
+import { GroupRowsComponent } from './group-rows/group-rows.component';
 
  
 
@@ -24,7 +26,9 @@ const routes: Routes = [
    
   {path:'storeExample', component: MyCounterComponent},
   {path: 'rxjs', component: RxJsOperatorsComponent},
-  {path: 'encaps', component: ShadowDomEncapsulationComponent}
+  {path: 'encaps', component: ShadowDomEncapsulationComponent},
+  {path: 'reactiveForm', component: ReactiveFormExampleComponent},
+  {path: 'groupRows', component: GroupRowsComponent}
   
 ];
 

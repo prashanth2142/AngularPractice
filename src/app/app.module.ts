@@ -29,7 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
-import {NgIf} from '@angular/common';
+import {CommonModule, NgIf} from '@angular/common';
 import { ProductComponent } from './product/product.component';
 import { StoreModule } from '@ngrx/store';
 import { counterReducer } from './store/counter.reducer';
@@ -41,6 +41,9 @@ import { RxJsOperatorsComponent } from './rx-js-operators/rx-js-operators.compon
 import { NoEncapsulationComponent } from './Encapsulation/no-encapsulation/no-encapsulation.component';
 import { EmulatedEncapsulationComponent } from './Encapsulation/emulated-encapsulation/emulated-encapsulation.component';
 import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-encapsulation/shadow-dom-encapsulation.component';
+import { GroupRowsComponent } from './group-rows/group-rows.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -57,10 +60,12 @@ import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-enca
     SidenavComponent,
     ProductComponent,
     MyCounterComponent,
-    RxJsOperatorsComponent
+    RxJsOperatorsComponent,
+    GroupRowsComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
@@ -83,7 +88,9 @@ import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-enca
     MatNativeDateModule, 
     MatInputModule, FormsModule, NgIf, MatButtonModule, MatIconModule,
     MatCheckboxModule,
-    StoreModule.forRoot({ count: counterReducer })
+    StoreModule.forRoot({ count: counterReducer }),
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [  MatDatepickerModule,
     MatNativeDateModule  ],

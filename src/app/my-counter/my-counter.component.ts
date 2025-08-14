@@ -26,6 +26,10 @@ export class MyCounterComponent {
     this.getUpdatedValue();
     //this.rxJSExample();
 this.mergeMapExam();
+let numbers = [1, 4, 5];
+numbers.splice(1, 0, 2); // At index 1, remove 0 elements, insert 2
+console.log(numbers); // [1, 2, 3, 4, 5]
+
     
   }
  
