@@ -12,6 +12,7 @@ import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-enca
 import { ReactiveFormExampleComponent } from './Forms/reactive-form-example/reactive-form-example.component';
 import { GroupRowsComponent } from './group-rows/group-rows.component';
 import { TestFormComponent } from './test-form/test-form.component';
+import { PngTableComponent } from './png-table/png-table.component';
 
  
 
@@ -30,7 +31,8 @@ const routes: Routes = [
   {path: 'encaps', component: ShadowDomEncapsulationComponent},
   {path: 'reactiveForm', component: ReactiveFormExampleComponent},
   {path: 'groupRows', component: GroupRowsComponent},
-  {path:'test-form', component: TestFormComponent}
+  {path:'test-form', component: TestFormComponent},
+  {path:'png-table', component: PngTableComponent}
   
 ];
 

@@ -45,6 +45,7 @@ import { GroupRowsComponent } from './group-rows/group-rows.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TestFormComponent } from './test-form/test-form.component';
+import { TableModule } from 'primeng/table';
 
 
 @NgModule({
@@ -93,7 +94,9 @@ import { TestFormComponent } from './test-form/test-form.component';
     StoreModule.forRoot({ count: counterReducer }),
     MatPaginatorModule,
     MatSortModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    TableModule
   ],
   providers: [  MatDatepickerModule,
     MatNativeDateModule  ],

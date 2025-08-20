@@ -1,0 +1,53 @@
+<!-- sample-table.component.html -->
+<div class="card">
+    <h2>Products Table with Top Horizontal Scrollbar</h2>
+    
+    <!-- Top horizontal scrollbar -->
+   
+
+    <!-- PrimeNG Table -->
+    <div class="table-container" id="tableContainer">
+        <p-table #dataTable
+            [value]="products"  
+             >
+            
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of cols" [style]="{'min-width': '200px'}">
+                        {{ col.header }}
+                    </th>
+                </tr>
+                 
+            </ng-template>
+            
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{ product.code }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.price   }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>
+                        <span 
+                            class="product-badge" 
+                            [class]="'status-' + product.inventoryStatus.toLowerCase()">
+                            {{ product.inventoryStatus }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="rating">
+                            <i class="pi pi-star-fill" *ngFor="let star of [].constructor(product.rating)"></i>
+                        </div>
+                    </td>
+                    <td>{{ product.orders }}</td>
+                    <td>{{ product.sales   }}</td>
+                    <td>{{ product.revenue   }}</td>
+                    <td>{{ product.profit  }}</td>
+                    <td>{{ product.margin }}%</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+ 
