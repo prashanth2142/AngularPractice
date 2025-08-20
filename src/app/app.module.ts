@@ -44,6 +44,7 @@ import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-enca
 import { GroupRowsComponent } from './group-rows/group-rows.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { TestFormComponent } from './test-form/test-form.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { MatSortModule } from '@angular/material/sort';
     ProductComponent,
     MyCounterComponent,
     RxJsOperatorsComponent,
-    GroupRowsComponent
+    GroupRowsComponent,
+    TestFormComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatCheckboxModule,
     StoreModule.forRoot({ count: counterReducer }),
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule
   ],
   providers: [  MatDatepickerModule,
     MatNativeDateModule  ],

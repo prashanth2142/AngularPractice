@@ -11,6 +11,7 @@ import { RxJsOperatorsComponent } from './rx-js-operators/rx-js-operators.compon
 import { ShadowDomEncapsulationComponent } from './Encapsulation/shadow-dom-encapsulation/shadow-dom-encapsulation.component';
 import { ReactiveFormExampleComponent } from './Forms/reactive-form-example/reactive-form-example.component';
 import { GroupRowsComponent } from './group-rows/group-rows.component';
+import { TestFormComponent } from './test-form/test-form.component';
 
  
 
@@ -28,7 +29,8 @@ const routes: Routes = [
   {path: 'rxjs', component: RxJsOperatorsComponent},
   {path: 'encaps', component: ShadowDomEncapsulationComponent},
   {path: 'reactiveForm', component: ReactiveFormExampleComponent},
-  {path: 'groupRows', component: GroupRowsComponent}
+  {path: 'groupRows', component: GroupRowsComponent},
+  {path:'test-form', component: TestFormComponent}
   
 ];
 
