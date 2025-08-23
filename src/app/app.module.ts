@@ -46,6 +46,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TestFormComponent } from './test-form/test-form.component';
 import { TableModule } from 'primeng/table';
+import { SaveRecordsBulkComponent } from './save-records-bulk/save-records-bulk.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { TableModule } from 'primeng/table';
     MyCounterComponent,
     RxJsOperatorsComponent,
     GroupRowsComponent,
-    TestFormComponent
+    TestFormComponent,
+    SaveRecordsBulkComponent
   ],
   imports: [
     BrowserModule,

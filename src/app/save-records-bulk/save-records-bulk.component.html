@@ -1,0 +1,129 @@
+<div class="checklist-container">
+    <h2>Information - Bulk Save</h2>
+
+    <div class="info-bar" *ngIf="checkListData.length > 0">
+        <span class="info-item">Total Records: {{ checkListData.length }}</span>
+        <span class="info-item">Modified Records: {{ getModifiedCount() }}</span>
+        <span class="info-item modified-indicator" *ngIf="getModifiedCount() > 0">
+            ● {{ getModifiedCount() }} row(s) have changes
+        </span>
+    </div>
+
+    <div class="table-controls">
+        <button type="button" class="btn btn-primary" (click)="addRow()">
+            Add New Row
+        </button>
+        <button type="button" class="btn btn-success" (click)="saveModified()" [disabled]="getModifiedCount() === 0">
+            Save Modified ({{ getModifiedCount() }})
+        </button>
+        <button type="button" class="btn btn-warning" (click)="resetChanges()" [disabled]="getModifiedCount() === 0">
+            Reset Changes
+        </button>
+        <button type="button" class="btn btn-info" (click)="showModifiedOnly = !showModifiedOnly"
+            *ngIf="getModifiedCount() > 0">
+            {{ showModifiedOnly ? 'Show All' : 'Show Modified Only' }}
+        </button>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>ID</th>
+                    <th> Name</th>
+                    <th> Label</th>
+                    <th> Description</th>
+                    <th>Attachment</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of getDisplayData(); let i = index" [class.modified-row]="item._isModified"
+                    [class.new-row]="isNewRow(item)">
+                    <td class="status-column">
+                        <span *ngIf="item._isModified && !isNewRow(item)" class="status-badge modified"
+                            title="This row has been modified">
+                            M
+                        </span>
+                        <span *ngIf="isNewRow(item)" class="status-badge new" title="This is a new row">
+                            N
+                        </span>
+                        <span *ngIf="!item._isModified && !isNewRow(item)" class="status-badge unchanged"
+                            title="This row is unchanged">
+                            <mat-icon>check_circle</mat-icon>
+                        </span>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" [value]="item.id"
+                            (input)="onFieldChange(item, 'id', $event)" placeholder="Enter ID"
+                            [class.is-invalid]="!item.id && showValidation">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" [value]="item.name"
+                            (input)="onFieldChange(item, 'name', $event)" placeholder="Enter  Name"
+                            [class.is-invalid]="!item.name && showValidation">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" [value]="item.label"
+                            (input)="onFieldChange(item, 'label', $event)" placeholder="Enter  Label"
+                            [class.is-invalid]="!item.label && showValidation">
+                    </td>
+                    <td>
+                        <textarea class="form-control" [value]="item.description"
+                            (input)="onFieldChange(item, 'description', $event)" placeholder="Enter  Description"
+                            rows="2" [class.is-invalid]="!item.description && showValidation">
+                </textarea>
+                    </td>
+                    <td>
+                        <input type="file" class="form-control" (change)="onFileSelected($event, item)" accept="*/*">
+                        <small *ngIf="item.attachment" class="text-muted">
+                            Selected: {{item.attachment.name}}
+                        </small>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button type="button" class="btn btn-sm btn-secondary" (click)="resetRow(item)"
+                                [disabled]="!item._isModified" title="Reset this row to original values">
+                                Reset
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger" (click)="removeRow(item)">
+                                Remove
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="getDisplayData().length === 0">
+                    <td colspan="7" class="text-center text-muted">
+                        {{ showModifiedOnly ? 'No modified records to show.' : 'No data available. Click "Add New Row"
+                        to start.' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Validation Messages -->
+    <div *ngIf="showValidation && validationErrors.length > 0" class="alert alert-danger">
+        <strong>Please fix the following errors:</strong>
+        <ul class="mb-0">
+            <li *ngFor="let error of validationErrors">{{ error }}</li>
+        </ul>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="showSuccessMessage" class="alert alert-success">
+        <strong>Success!</strong> {{ lastSaveCount }} record(s) have been saved successfully.
+    </div>
+
+    <!-- Modified Records Preview -->
+    <div *ngIf="getModifiedCount() > 0" class="modified-preview">
+        <h4>Modified Records Preview:</h4>
+        <div class="preview-list">
+            <div *ngFor="let item of getModifiedRows()" class="preview-item">
+                <strong>{{ isNewRow(item) ? 'NEW' : 'MODIFIED' }}:</strong>
+                ID: {{ item.id || 'Empty' }} | Name: {{ item.name || 'Empty' }}
+            </div>
+        </div>
+    </div>
+</div>

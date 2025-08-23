@@ -13,6 +13,7 @@ import { ReactiveFormExampleComponent } from './Forms/reactive-form-example/reac
 import { GroupRowsComponent } from './group-rows/group-rows.component';
 import { TestFormComponent } from './test-form/test-form.component';
 import { PngTableComponent } from './png-table/png-table.component';
+import { SaveRecordsBulkComponent } from './save-records-bulk/save-records-bulk.component';
 
  
 
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path: 'reactiveForm', component: ReactiveFormExampleComponent},
   {path: 'groupRows', component: GroupRowsComponent},
   {path:'test-form', component: TestFormComponent},
-  {path:'png-table', component: PngTableComponent}
+  {path:'png-table', component: PngTableComponent},
+    {path:'bulk-save', component: SaveRecordsBulkComponent}
   
 ];
 
