@@ -1,0 +1,11 @@
+<h2>Login</h2>
+
+<input
+  type="text"
+  placeholder="Enter username (admin / user)"
+  [(ngModel)]="username"
+/>
+
+<button (click)="login()">Login</button>
+
+<p style="color:red" *ngIf="error">{{ error }}</p>

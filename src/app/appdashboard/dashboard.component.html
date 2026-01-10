@@ -1,0 +1,22 @@
+@if (user) {
+  <h2>Welcome, {{ user.name }}</h2>
+  <p>Role: {{ user.role }}</p>
+
+  <button>View Profile</button>
+
+  @if (user.role === 'Admin') {
+    <h3>Admin Panel</h3>
+    <button>Create User</button>
+    <button>Delete User</button>
+    <button>View Reports</button>
+  }
+
+  @if (user.role === 'User') {
+    <h3>User Dashboard</h3>
+    <button>View Orders</button>
+    <button>Update Profile</button>
+  }
+
+  <br /><br />
+  <button (click)="logout()">Logout</button>
+}

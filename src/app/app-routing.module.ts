@@ -14,11 +14,16 @@ import { GroupRowsComponent } from './group-rows/group-rows.component';
 import { TestFormComponent } from './test-form/test-form.component';
 import { PngTableComponent } from './png-table/png-table.component';
 import { SaveRecordsBulkComponent } from './save-records-bulk/save-records-bulk.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './appdashboard/dashboard.component';
 
  
 
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'about', component: AboutComponent},
