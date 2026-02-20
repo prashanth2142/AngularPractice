@@ -16,6 +16,7 @@ import { PngTableComponent } from './png-table/png-table.component';
 import { SaveRecordsBulkComponent } from './save-records-bulk/save-records-bulk.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './appdashboard/dashboard.component';
+import { CsvUploadComponent } from './csv-upload/csv-upload.component';
 
  
 
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path: 'groupRows', component: GroupRowsComponent},
   {path:'test-form', component: TestFormComponent},
   {path:'png-table', component: PngTableComponent},
-    {path:'bulk-save', component: SaveRecordsBulkComponent}
+    {path:'bulk-save', component: SaveRecordsBulkComponent},
+    {path:'csv-upload', component: CsvUploadComponent}
   
 ];
 

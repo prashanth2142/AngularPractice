@@ -47,7 +47,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { TestFormComponent } from './test-form/test-form.component';
 import { TableModule } from 'primeng/table';
 import { SaveRecordsBulkComponent } from './save-records-bulk/save-records-bulk.component';
-
+import { ButtonModule } from 'primeng/button';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CsvUploadComponent } from './csv-upload/csv-upload.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { SaveRecordsBulkComponent } from './save-records-bulk/save-records-bulk.
     RxJsOperatorsComponent,
     GroupRowsComponent,
     TestFormComponent,
-    SaveRecordsBulkComponent
+    SaveRecordsBulkComponent,
+    CsvUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,10 @@ import { SaveRecordsBulkComponent } from './save-records-bulk/save-records-bulk.
     MatSortModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    TableModule
+    TableModule,
+    FileUploadModule,
+    ButtonModule,
+    InputTextModule
   ],
   providers: [  MatDatepickerModule,
     MatNativeDateModule  ],

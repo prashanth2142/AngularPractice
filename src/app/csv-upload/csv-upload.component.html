@@ -1,0 +1,62 @@
+<div class="p-m-4">
+
+  <!-- File Upload -->
+  <p-fileUpload
+      mode="basic"
+      name="csv"
+      accept=".csv"
+      chooseLabel="Upload CSV"
+      customUpload="true"
+      (uploadHandler)="onFileSelect($event)">
+  </p-fileUpload>
+
+  <!-- Table -->
+   <p-table
+    *ngIf="dataSource.length > 0"
+    [value]="dataSource"
+    editMode="cell"
+    dataKey="id"
+    responsiveLayout="scroll">
+
+    <!-- Header -->
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of columns">
+                {{ col.header }}
+            </th>
+        </tr>
+    </ng-template>
+
+    <!-- Body -->
+    <ng-template pTemplate="body" let-row>
+  <tr>
+    <td *ngFor="let col of columns" pEditableColumn>
+
+      <p-cellEditor>
+
+        <!-- INPUT MODE -->
+        <ng-template pTemplate="input">
+          <input pInputText
+                 [(ngModel)]="row[col.field]"
+                 (ngModelChange)="onCellEdit(row)"
+                 [class.invalid-field]="row.errors[col.field]" />
+        </ng-template>
+
+        <!-- DISPLAY MODE -->
+        <ng-template pTemplate="output">
+          {{ row[col.field] }}
+        </ng-template>
+
+      </p-cellEditor>
+
+      <!-- Validation Message -->
+      <div class="error-text" *ngIf="row.errors[col.field]">
+        {{ row.errors[col.field] }}
+      </div>
+
+    </td>
+  </tr>
+</ng-template>
+
+</p-table>
+</div>
